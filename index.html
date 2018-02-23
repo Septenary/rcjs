@@ -3,7 +3,8 @@
 <head>
 <style>
 	body{background: #31A4B2; font-family: verdana; color:#fff, padding: 5px;}
-	h1{font-size: 48px; text-transform: uppercase; letter-spacing: 2px; padding: 5px; text-align: center;color: #FFF}
+	h1{font-size: 48px; text-transform: uppercase; letter-spacing: 2px; text-align: center;color: #FFF}
+	h2{font-size: 36px; letter-spacing: 2px; text-align: center;color: #FFF}
 	.btn-group button {
 		background-color: #33B24F;
 		font-weight: 900;
@@ -19,10 +20,21 @@
 	.btn-group button:not(:last-child) {
 	    border-bottom: none; /* Prevent double borders */
 	}
-
 	/* Add a background color on hover */
 	.btn-group button:hover {
 	    background-color: #30CC53;
+	}
+	.pagi{
+	width: 60%;
+	margin: auto;
+	margin-bottom: 40px;
+	}
+	input[type="submit"]{
+  		background: #fff;
+  		border: 1px solid #000;
+		height: 50px;
+		width: 100px;
+		text-size:20px;
 	}
 </style>
 </head>
@@ -33,7 +45,8 @@
   var socket = io();
 </script>
 
-<h1>10.0.0.23</h1>
+<!-- <h1>10.0.0.23</h1> -->
+<h2>10.0.0.23  &mdash;  Input Module</h2>
 <div class ="btn-group">
 <button type="button" id="button1" onclick="togglePin(1)">Toggle Relay 1</button>
 <button type="button" id="button2" onclick="togglePin(2)">Toggle Relay 2</button>
@@ -53,8 +66,20 @@ socket.on('pinUpdate', function(pin, state){
 		document.getElementById("button"+pin).style.color = 'white'
 }})
 </script>
-
-
+</br>
+<div class="pagi">
+<form action="http://10.0.0.22:8000/index.html" style="float:left">
+    <input type="submit" value="10.0.0.22" />
+</form>
+<form action="http://10.0.0.24:8000/index.html" style="float:right">
+    <input type="submit" value="10.0.0.24" />
+</form>
+</div>
+<p style="padding-top: 25px;">
+Copyright &copy; 2017-2018 John R. Craps - All Rights Reserved</br>
+Unauthorized copying, modification, and/or distribution of this file, via any medium, is strictly prohibited.</br>
+Version 2.2.0 - For internal use only</br>
+</p>
 </body>
 
 </html>

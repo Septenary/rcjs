@@ -69,8 +69,3 @@ io.on('connect', function(client) {
 		io.emit('pinUpdate', pin, 1-(rpio.read(pinList[pin-1])));
     });
 });
-
-
-
-
-
