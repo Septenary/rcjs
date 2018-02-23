@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+	body{background: #31A4B2; font-family: verdana; color:#fff, padding: 5px;}
+	h1{font-size: 48px; text-transform: uppercase; letter-spacing: 2px; padding: 5px; text-align: center;color: #FFF}
+	.btn-group button {
+		background-color: #33B24F;
+		font-weight: 900;
+		border: 2px solid green;
+		color: white;
+		padding: 10px 24px;
+		cursor: pointer;
+		width: 90%;
+	   	margin-left: auto;
+	   	margin-right: auto;
+		display: block;
+	}
+	.btn-group button:not(:last-child) {
+	    border-bottom: none; /* Prevent double borders */
+	}
+
+	/* Add a background color on hover */
+	.btn-group button:hover {
+	    background-color: #30CC53;
+	}
+</style>
+</head>
+<body>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io();
+</script>
+
+<h1>10.0.0.23</h1>
+<div class ="btn-group">
+<button type="button" id="button1" onclick="togglePin(1)">Toggle Relay 1</button>
+<button type="button" id="button2" onclick="togglePin(2)">Toggle Relay 2</button>
+<button type="button" id="button3" onclick="togglePin(3)">Toggle Relay 3</button>
+<button type="button" id="button4" onclick="togglePin(4)">Toggle Relay 4</button>
+<button type="button" id="button5" onclick="togglePin(5)">Toggle Relay 5</button>
+<button type="button" id="button6" onclick="togglePin(6)">Toggle Relay 6</button>
+<button type="button" id="button7" onclick="togglePin(7)">Toggle Relay 7</button>
+<button type="button" id="button8" onclick="togglePin(8)">Toggle Relay 8</button>
+</div>
+<script>
+function togglePin(pin){socket.emit('togglePin', pin);}
+socket.on('pinUpdate', function(pin, state){
+	if (state == 1){
+		document.getElementById("button"+pin).style.color = '#B23151'
+	} else {
+		document.getElementById("button"+pin).style.color = 'white'
+}})
+</script>
+
+
+</body>
+
+</html>
