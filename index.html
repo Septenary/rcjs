@@ -12,7 +12,7 @@
 		color: white;
 		padding: 10px 24px;
 		cursor: pointer;
-		width: 90%;
+		width: 100%;
 	   	margin-left: auto;
 	   	margin-right: auto;
 		display: block;
@@ -47,15 +47,28 @@
 
 <!-- <h1>10.0.0.23</h1> -->
 <h2>10.0.0.23  &mdash;  Input Module</h2>
-<div class ="btn-group">
-<button type="button" id="button1" onclick="togglePin(1)">Toggle Relay 1</button>
-<button type="button" id="button2" onclick="togglePin(2)">Toggle Relay 2</button>
-<button type="button" id="button3" onclick="togglePin(3)">Toggle Relay 3</button>
-<button type="button" id="button4" onclick="togglePin(4)">Toggle Relay 4</button>
-<button type="button" id="button5" onclick="togglePin(5)">Toggle Relay 5</button>
-<button type="button" id="button6" onclick="togglePin(6)">Toggle Relay 6</button>
-<button type="button" id="button7" onclick="togglePin(7)">Toggle Relay 7</button>
-<button type="button" id="button8" onclick="togglePin(8)">Toggle Relay 8</button>
+<div align="center" style="width=90%">
+<div align="center">
+<div class ="btn-group" style="display: inline-block">
+<button type="button" id="button0" onclick="togglePin(0)">Toggle Relay 1</button>
+<button type="button" id="button1" onclick="togglePin(1)">Toggle Relay 2</button>
+<button type="button" id="button2" onclick="togglePin(2)">Toggle Relay 3</button>
+<button type="button" id="button3" onclick="togglePin(3)">Toggle Relay 4</button>
+<button type="button" id="button4" onclick="togglePin(4)">Toggle Relay 5</button>
+<button type="button" id="button5" onclick="togglePin(5)">Toggle Relay 6</button>
+<button type="button" id="button6" onclick="togglePin(6)">Toggle Relay 7</button>
+<button type="button" id="button7" onclick="togglePin(7)">Toggle Relay 8</button>
+</div>
+<div class ="btn-group" style="display: inline-block">
+<button type="button" id="button8" onclick="togglePin(8)">Toggle Relay 9</button>
+<button type="button" id="button9" onclick="togglePin(9)">Toggle Relay 10</button>
+<button type="button" id="button10" onclick="togglePin(10)">Toggle Relay 11</button>
+<button type="button" id="button11" onclick="togglePin(11)">Toggle Relay 12</button>
+<button type="button" id="button12" onclick="togglePin(12)">Toggle Relay 13</button>
+<button type="button" id="button13" onclick="togglePin(13)">Toggle Relay 14</button>
+<button type="button" id="button14" onclick="togglePin(14)">Toggle Relay 15</button>
+<button type="button" id="button15" onclick="togglePin(15)">Toggle Relay 16</button>
+</div>
 </div>
 <script>
 function togglePin(pin){socket.emit('togglePin', pin);}
@@ -80,6 +93,7 @@ Copyright &copy; 2017-2018 John R. Craps - All Rights Reserved</br>
 Unauthorized copying, modification, and/or distribution of this file, via any medium, is strictly prohibited.</br>
 Version 2.2.0 - For internal use only</br>
 </p>
+</div>
 </body>
 
 </html>
