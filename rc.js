@@ -1,3 +1,8 @@
+/*  Copyright © 2017-2018 John R. Craps - All Rights Reserved
+ *  Unauthorized copying, modification, and/or distribution of this file, via any medium, is strictly prohibited.
+ *  Version 2.4.0 - For internal use only
+ */
+
 var http = require('http')
 var url = require('url')
 var fs = require('fs')
