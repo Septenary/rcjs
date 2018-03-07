@@ -47,17 +47,39 @@
 
 <!-- <h1>10.0.0.16</h1> -->
 <h2>10.0.0.16  &mdash;  Input Module</h2>
-<div align="center" style="width=90%">
-<div class ="btn-group" style="display: inline-block">
-<button type="button" id="button0" onclick="togglePin(0)">Toggle Relay 1</button>
-<button type="button" id="button1" onclick="togglePin(1)">Toggle Relay 2</button>
-<button type="button" id="button2" onclick="togglePin(2)">Toggle Relay 3</button>
-<button type="button" id="button3" onclick="togglePin(3)">Toggle Relay 4</button>
-<button type="button" id="button4" onclick="togglePin(4)">Toggle Relay 5</button>
-<button type="button" id="button5" onclick="togglePin(5)">Toggle Relay 6</button>
-<button type="button" id="button6" onclick="togglePin(6)">Toggle Relay 7</button>
-<button type="button" id="button7" onclick="togglePin(7)">Toggle Relay 8</button>
+
+
+<table align="center" style="height: auto; width:auto">
+<tbody>
+<tr style="height:auto">
+<td align="center">
+<form class="pagi" action="http://10.0.0.16:8000/index.html" style="float:left">
+    <input type="submit" value="10.0.0.15" />
+</form>
+</td>
+<td style="width: 10%" align="center">&nbsp;</td>
+<td align="center">
+<div class="btn-group" style="display: inline-block;">
+<button id="button0" type="button">Toggle Relay 1</button>
+<button id="button1" type="button">Toggle Relay 2</button>
+<button id="button2" type="button">Toggle Relay 3</button>
+<button id="button3" type="button">Toggle Relay 4</button>
+<button id="button4" type="button">Toggle Relay 5</button>
+<button id="button5" type="button">Toggle Relay 6</button>
+<button id="button6" type="button">Toggle Relay 7</button>
+<button id="button7" type="button">Toggle Relay 8</button>
 </div>
+</td>
+<td style="width: 10%" align="center">&nbsp;</td>
+<td align="center">
+<form class="pagi" action="http://10.0.0.16:8000/index.html" style="float:left">
+    <input type="submit" value="10.0.0.15" />
+</form>
+</td>
+</tr>
+</tbody>
+</table>
+
 
 <script>
 function togglePin(pin){socket.emit('togglePin', pin);}
@@ -69,20 +91,14 @@ socket.on('pinUpdate', function(pin, state){
 }})
 </script>
 </br>
-<div class="pagi">
-<form action="http://10.0.0.16:8000/index.html" style="float:left">
-    <input type="submit" value="10.0.0.15" />
-</form>
-<form action="http://10.0.0.24:8000/index.html" style="float:right">
-    <input type="submit" value="10.0.0.17" />
-</form>
-</div>
-<p style="padding-top: 25px;">
+
+
+<p align="center">
 Copyright &copy; 2017-2018 John R. Craps - All Rights Reserved</br>
 Unauthorized copying, modification, and/or distribution of this file, via any medium, is strictly prohibited.</br>
 Version 2.4.0 - For internal use only</br>
 </p>
-</div>
+
 </body>
 
 </html>
