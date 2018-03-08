@@ -1,6 +1,6 @@
 /*  Copyright © 2017-2018 John R. Craps - All Rights Reserved
  *  Unauthorized copying, modification, and/or distribution of this file, via any medium, is strictly prohibited.
- *  Version 2.4.0 - For internal use only
+ *  Version 2.6.0 - For internal use only
  */
 
 var http = require('http')
@@ -10,7 +10,7 @@ var path = require('path')
 var baseDirectory = __dirname
 var r = require('array-gpio')
 
-var port = 8000
+var port = 80
 
 var server = http.createServer(function (request, response) {
     try {
@@ -18,6 +18,7 @@ var server = http.createServer(function (request, response) {
 
         // need to use path.normalize so people can't access directories underneath baseDirectory
         var fsPath = baseDirectory+path.normalize(requestUrl.pathname)
+   	if (fs.statSync(fsPath).isDirectory()) fsPath += '/index.html';
 
         var fileStream = fs.createReadStream(fsPath)
         fileStream.pipe(response)

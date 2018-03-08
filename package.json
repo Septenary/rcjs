@@ -1,6 +1,6 @@
 {
   "name": "RelayController",
-  "version": "0.4.0",
+  "version": "2.6.0",
   "description": "controls a relay board",
   "main": "rc.js",
   "scripts": {
