@@ -37,9 +37,12 @@ var server = http.createServer(function (request, response) {
 });
 
 var pinOut = r.out(3,5,7,10,12,16,13,15);
+var clearPins = function(){
     for (var i = 0; i < pinOut.length; i++){
     pinOut[i].write(1);
-};
+    clientUpdate();
+}};
+clearPins();
 
 var clientUpdate = function (){
     for (var i = 0; i < pinOut.length; i++ ){
@@ -52,14 +55,6 @@ var togglePin = function(pin){
     //console.log("Relay " +(pin+1)+ ": " + state);
     clientUpdate();
 })};
-
-var clearPins = function(){
-    for (var i = 0; i < pinOut.length; i++){
-    pinOut[i].write(1);
-    clientUpdate();
-}};
-
-
 
 var io = require('socket.io')(server);
 server.listen(port);
