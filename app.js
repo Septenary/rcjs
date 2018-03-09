@@ -40,7 +40,6 @@ var pinOut = r.out(3,5,7,10,12,16,13,15);
 var clearPins = function(){
     for (var i = 0; i < pinOut.length; i++){
     pinOut[i].write(1);
-    clientUpdate();
 }};
 clearPins();
 
@@ -69,6 +68,7 @@ io.on('connect', function(client) {
 
     client.on('clearPins', function(pin) {
         clearPins();
+   	clientUpdate();
     });
 
     setInterval(clientUpdate, 500);
