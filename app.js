@@ -18,7 +18,7 @@ var server = http.createServer(function (request, response) {
 
         // need to use path.normalize so people can't access directories underneath baseDirectory
         var fsPath = baseDirectory+path.normalize(requestUrl.pathname)
-   	if (fs.statSync(fsPath).isDirectory()) fsPath += '/index.html';
+    if (fs.statSync(fsPath).isDirectory()) fsPath += '/index.html';
 
         var fileStream = fs.createReadStream(fsPath)
         fileStream.pipe(response)
@@ -37,29 +37,47 @@ var server = http.createServer(function (request, response) {
 });
 
 var pinOut = r.out(3,5,7,10,12,16,13,15);
-	for (var i = 0; i < pinOut.length; i++){
-	pinOut[i].write(1);
+    for (var i = 0; i < pinOut.length; i++){
+    pinOut[i].write(1);
 };
 
-var togglePin = (function(pin){
-	state = pinOut[pin].read(() => {
-	pinOut[pin].write(1-state)
-	console.log("Relay " +(pin+1)+ ": " + state);
-})});
+var clientUpdate = function (){
+    for (var i = 0; i < pinOut.length; i++ ){
+    io.emit('pinUpdate', i, 1-pinOut[i].read());
+}};
+
+var togglePin = function(pin){
+    state = pinOut[pin].read(() => {
+    pinOut[pin].write(1-state)
+    //console.log("Relay " +(pin+1)+ ": " + state);
+    clientUpdate();
+})};
+
+var clearPins = function(){
+    for (var i = 0; i < pinOut.length; i++){
+    pinOut[i].write(1);
+    clientUpdate();
+}};
+
 
 
 var io = require('socket.io')(server);
 server.listen(port);
 console.log('Server @ 10.0.0.16:'+port);
 io.on('connect', function(client) { 
-	console.log('Client connected...'); 
-	for (var i = 0; i < pinOut.length; i++ ){
-		io.emit('pinUpdate', i, 1-pinOut[i].read());
-	};
-	console.log('Clients updated...')
-    	client.on('togglePin', function(pin) {
-    		togglePin(pin);
-		io.emit('pinUpdate', pin, pinOut[pin].read());
-		//console.log('relay'+pin)
+    console.log('Client connected...'); 
+    clientUpdate();
+
+    client.on('togglePin', function(pin) {
+        togglePin(pin);
     });
+
+    client.on('clearPins', function(pin) {
+        clearPins();
+    });
+
+    setInterval(clientUpdate, 500);
+
 });
+
+
