@@ -117,7 +117,7 @@
 			<button type="relay" id="button25" onclick="togglePin(5), togglePin(1), togglePin(4)">Toggle Relays 6, 2, 5</button>
 			<button type="relay" id="button26" onclick="togglePin(6), togglePin(2), togglePin(5)">Toggle Relays 7, 3, 6</button>
 			<button type="relay" id="button27" onclick="togglePin(7), togglePin(3), togglePin(6)">Toggle Relays 8, 4, 7</button>
-			<button type="relay" id="button23" onclick="resetPins()">Reset all Relays</button>		
+			<button type="relay" id="button23" onclick="clearPins()">Reset all Relays</button>		
 		</div>
 		<form action="http://10.0.0.15" style="grid-row: 2; grid-column: 1">
    			<input type="submit" value="10.0.0.15" />
@@ -133,7 +133,8 @@
 	</div> 
 
 	<script>
-		function togglePin(pin){socket.emit('togglePin', pin);}
+		function togglePin(pin){socket.emit('togglePin', pin)};
+		function clearPins(){socket.emit('clearPins')};
 		socket.on('pinUpdate', function(pin, state){
 			if (state == 1){
 				document.getElementById("relay"+pin).style.color = '#B23151'
