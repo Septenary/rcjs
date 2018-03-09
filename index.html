@@ -15,6 +15,15 @@
 		text-align: center;
 		color: #FFF
 	}
+	input[type="submit"]{
+  		background: #fff;
+  		border: 2px solid #000;
+  		padding: 10px 24px;
+		height: 100%;
+		width: 100%;
+		font-size: 200%;
+		cursor: pointer;	
+	}	
 	.title {
 	text-shadow:
 		-2px -2px 0 #000,
@@ -31,6 +40,12 @@
 	.grid-container {
 		display: grid;
 		grid-template-columns: 4fr 7fr 7fr 4fr;
+		background-color: #EEE;
+		padding: 10px;
+	}
+	.form-container {
+		display: grid;
+		grid-template-columns: repeat(2, auto);
 		background-color: #EEE;
 		padding: 10px;
 	}
@@ -58,15 +73,6 @@
 	}
 	.button-container button:hover {
 	    background-color: #278590;
-	}
-	input[type="submit"]{
-  		background: #fff;
-  		border: 2px solid #000;
-  		padding: 10px 24px;
-		height: 100%;
-		width: 100%;
-		font-size: 200%;
-		cursor: pointer;		
 	}	
 </style>
 	<script src="/socket.io/socket.io.js"></script>
@@ -119,12 +125,22 @@
 			<button type="relay" id="button27" onclick="togglePin(7), togglePin(3), togglePin(6)">Toggle Relays 8, 4, 7</button>
 			<button type="relay" id="button23" onclick="clearPins()">Reset all Relays</button>		
 		</div>
-		<form action="http://10.0.0.15" style="grid-row: 2; grid-column: 1">
-   			<input type="submit" value="10.0.0.15" />
-		</form>
-		<form action="http://10.0.0.17" style="grid-row: 2; grid-column: 4">
-    		<input type="submit" value="10.0.0.17" />
-		</form>
+		<div class="form-container" style="grid-row: 2; grid-column: 1">
+			<form action="http://10.0.0.14" style="grid-column: 1">
+	   			<input type="submit" value="10.0.0.14" />
+			</form>
+			<form action="http://10.0.0.15" style="grid-column: 2">
+	   			<input style ="border-left: none" class="formlast" type="submit" value="10.0.0.15" />
+			</form>		
+		</div>
+		<div class="form-container" style="grid-row: 2; grid-column: 4">
+			<form action="http://10.0.0.16" style="grid-column: 1">
+	   			<input type="submit" value="10.0.0.16" />
+			</form>
+			<form action="http://10.0.0.17" style="grid-column: 2">
+	   			<input style ="border-left: none" type="submit" value="10.0.0.17" />
+			</form>		
+		</div>
 		<p align="center" style="grid-column: 2 / 4; width: 85%; margin: auto;">
 			Copyright &copy; 2017-2018 John R. Craps - All Rights Reserved</br>
 			Unauthorized copying, modification, and/or distribution of this file, via any medium, is strictly prohibited.</br>
