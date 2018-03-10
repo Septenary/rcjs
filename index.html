@@ -94,33 +94,33 @@
 			<button type="relay" id="relay7" onclick="togglePin(7)">Toggle Relay 8</button>
 		</div>
 		<div class="button-container" style="grid-column: 2">
-			<button type="relay" id="button00" onclick="togglePin(0), togglePin(1)">Toggle Relays 1, 2</button>
-			<button type="relay" id="button01" onclick="togglePin(1), togglePin(2)">Toggle Relays 2, 3</button>
-			<button type="relay" id="button02" onclick="togglePin(2), togglePin(3)">Toggle Relays 3, 4</button>
-			<button type="relay" id="button03" onclick="togglePin(3), togglePin(4)">Toggle Relays 4, 5</button>
-			<button type="relay" id="button04" onclick="togglePin(4), togglePin(5)">Toggle Relays 5, 6</button>
-			<button type="relay" id="button05" onclick="togglePin(5), togglePin(6)">Toggle Relays 6, 7</button>
-			<button type="relay" id="button06" onclick="togglePin(6), togglePin(7)">Toggle Relays 7, 8</button>
-			<button type="relay" id="button07" onclick="togglePin(7), togglePin(0)">Toggle Relays 8, 1</button>
+			<button type="relay" id="button00" onclick="togglePin(0,1)">Toggle Relays 1, 2</button>
+			<button type="relay" id="button01" onclick="togglePin(1, 2)">Toggle Relays 2, 3</button>
+			<button type="relay" id="button02" onclick="togglePin(2, 3)">Toggle Relays 3, 4</button>
+			<button type="relay" id="button03" onclick="togglePin(3, 4)">Toggle Relays 4, 5</button>
+			<button type="relay" id="button04" onclick="togglePin(4, 5)">Toggle Relays 5, 6</button>
+			<button type="relay" id="button05" onclick="togglePin(5, 6)">Toggle Relays 6, 7</button>
+			<button type="relay" id="button06" onclick="togglePin(6, 7)">Toggle Relays 7, 8</button>
+			<button type="relay" id="button07" onclick="togglePin(7, 0)">Toggle Relays 8, 1</button>
 		</div>
 		<div class="button-container" style="grid-column: 3">
-			<button type="relay" id="button10" onclick="togglePin(0), togglePin(2)">Toggle Relays 1, 3</button>
-			<button type="relay" id="button11" onclick="togglePin(1), togglePin(3)">Toggle Relays 2, 4</button>
-			<button type="relay" id="button12" onclick="togglePin(2), togglePin(4)">Toggle Relays 3, 5</button>
-			<button type="relay" id="button13" onclick="togglePin(3), togglePin(5)">Toggle Relays 4, 6</button>
-			<button type="relay" id="button14" onclick="togglePin(4), togglePin(6)">Toggle Relays 5, 7</button>
-			<button type="relay" id="button15" onclick="togglePin(5), togglePin(7)">Toggle Relays 6, 8</button>
-			<button type="relay" id="button16" onclick="togglePin(6), togglePin(0), togglePin(3)">Toggle Relays 7, 1, 4</button>
-			<button type="relay" id="button17" onclick="togglePin(7), togglePin(1), togglePin(4)">Toggle Relays 8, 2, 5</button>			
+			<button type="relay" id="button10" onclick="togglePin(0, 2)">Toggle Relays 1, 3</button>
+			<button type="relay" id="button11" onclick="togglePin(1, 3)">Toggle Relays 2, 4</button>
+			<button type="relay" id="button12" onclick="togglePin(2, 4)">Toggle Relays 3, 5</button>
+			<button type="relay" id="button13" onclick="togglePin(3, 5)">Toggle Relays 4, 6</button>
+			<button type="relay" id="button14" onclick="togglePin(4, 6)">Toggle Relays 5, 7</button>
+			<button type="relay" id="button15" onclick="togglePin(5, 7)">Toggle Relays 6, 8</button>
+			<button type="relay" id="button16" onclick="togglePin(6, 0, 3)">Toggle Relays 7, 1, 4</button>
+			<button type="relay" id="button17" onclick="togglePin(7, 1, 4)">Toggle Relays 8, 2, 5</button>			
 		</div>
 		<div class="button-container" style="grid-column: 4">
-			<button type="relay" id="button20" onclick="togglePin(0), togglePin(4)">Toggle Relays 1, 5</button>
-			<button type="relay" id="button21" onclick="togglePin(1), togglePin(5)">Toggle Relays 2, 6</button>
-			<button type="relay" id="button22" onclick="togglePin(2), togglePin(6)">Toggle Relays 3, 7</button>
-			<button type="relay" id="button24" onclick="togglePin(4), togglePin(0), togglePin(3)">Toggle Relays 5, 1, 4</button>
-			<button type="relay" id="button25" onclick="togglePin(5), togglePin(1), togglePin(4)">Toggle Relays 6, 2, 5</button>
-			<button type="relay" id="button26" onclick="togglePin(6), togglePin(2), togglePin(5)">Toggle Relays 7, 3, 6</button>
-			<button type="relay" id="button27" onclick="togglePin(7), togglePin(3), togglePin(6)">Toggle Relays 8, 4, 7</button>
+			<button type="relay" id="button20" onclick="togglePin(0, 4)">Toggle Relays 1, 5</button>
+			<button type="relay" id="button21" onclick="togglePin(1, 5)">Toggle Relays 2, 6</button>
+			<button type="relay" id="button22" onclick="togglePin(2, 6)">Toggle Relays 3, 7</button>
+			<button type="relay" id="button24" onclick="togglePin(4, 0, 3)">Toggle Relays 5, 1, 4</button>
+			<button type="relay" id="button25" onclick="togglePin(5, 1, 4)">Toggle Relays 6, 2, 5</button>
+			<button type="relay" id="button26" onclick="togglePin(6, 2, 5)">Toggle Relays 7, 3, 6</button>
+			<button type="relay" id="button27" onclick="togglePin(7, 3, 6)">Toggle Relays 8, 4, 7</button>
 			<button type="relay" id="button23" onclick="clearPins()">Reset all Relays</button>		
 		</div>
 		<div class="form-container" style="grid-row: 2; grid-column: 1">
@@ -147,7 +147,9 @@
 	</div> 
 
 	<script>
-		function togglePin(pin){socket.emit('togglePin', pin)};
+		function togglePin(...args){
+			socket.emit(('togglePin'), args)
+		};
 		function clearPins(){socket.emit('clearPins')};
 		socket.on('pinUpdate', function(pin, state){
 			if (state == 1){

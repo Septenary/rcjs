@@ -48,12 +48,15 @@ var clientUpdate = function (){
     io.emit('pinUpdate', i, 1-pinOut[i].read());
 }};
 
-var togglePin = function(pin){
-    state = pinOut[pin].read(() => {
-    pinOut[pin].write(1-state)
-    //console.log("Relay " +(pin+1)+ ": " + state);
-    clientUpdate();
-})};
+var togglePin = function(){
+	var k = arguments[0]
+	for (var j = 0; j < k.length; j++){
+		state = pinOut[k[j]].read()
+		pinOut[k[j]].write(1-state)
+	 	//console.log("Relay " +(k[j]+1)+ ": " + state);
+	}
+    	clientUpdate();
+};
 
 var io = require('socket.io')(server);
 server.listen(port);
@@ -62,8 +65,9 @@ io.on('connect', function(client) {
     console.log('Client connected...'); 
     clientUpdate();
 
-    client.on('togglePin', function(pin) {
-        togglePin(pin);
+    client.on('togglePin', function(data) {
+	//console.log(data)
+        togglePin(data);
     });
 
     client.on('clearPins', function(pin) {
