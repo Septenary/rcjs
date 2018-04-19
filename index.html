@@ -40,10 +40,16 @@
 	}
 	.grid-container {
 		display: grid;
-		grid-template-columns: 4fr 7fr 7fr 4fr;
+		grid-template-columns: repeat(1, auto);
 		background-color: #EEE;
 		padding: 10px;
 	}
+	.bottom-container {
+		display: grid;
+		grid-template-columns: 4fr 7fr 7fr 4fr;
+		background-color: #EEE;
+		padding: 10px;
+	}	
 	.form-container {
 		display: grid;
 		grid-template-columns: repeat(1, auto);
@@ -52,24 +58,21 @@
 	}
 	.button-container {
 		display: grid;
-		grid-template-columns: repeat(1, auto);
-		background-color: #EEE;
-		padding: 10px;
+		grid-template-columns: repeat(4, 1fr);
+		background-color: #000;
+		padding: 2px;
+		grid-gap: 2px;
+		margin-bottom: 12px;
 	}	
 	.button-container button {
 		background-color: #31A4B2;
 		font-weight: 900;
-		border: 3px solid black;
 		color: white;
-		padding: 10px 24px;
 		cursor: pointer;
-		height: 4.5em;
+		height: 3.5em;
 		width: 100%;
 		font-size: 130%;
-/*		font-family: monospace; 		
-*/	}
-	.button-container button:not(:last-child) {
-	    border-bottom: none; /* Prevent double borders */
+		font-family: monospace; 
 	}
 	.button-container button:hover {
 	    background-color: #278590;
@@ -83,66 +86,117 @@
 		<a class="title" href="/" style="grid-column: 2">10.0.0.16  &mdash;  Input Module</a>
 	</div>
 	<div class="grid-container">
-		<div class="button-container" style="grid-column: 1">
-			<button type="relay" id="relay0" onclick="togglePin(0)">Toggle Relay 1</button>
-			<button type="relay" id="relay1" onclick="togglePin(1)">Toggle Relay 2</button>
-			<button type="relay" id="relay2" onclick="togglePin(2)">Toggle Relay 3</button>
-			<button type="relay" id="relay3" onclick="togglePin(3)">Toggle Relay 4</button>
-			<button type="relay" id="relay4" onclick="togglePin(4)">Toggle Relay 5</button>
-			<button type="relay" id="relay5" onclick="togglePin(5)">Toggle Relay 6</button>
-			<button type="relay" id="relay6" onclick="togglePin(6)">Toggle Relay 7</button>
-			<button type="relay" id="relay7" onclick="togglePin(7)">Toggle Relay 8</button>
+		<div class="button-container" style="grid-row: 1">
+			<button type="relay" id="relay0" onclick="togglePin(0)">PB 1,OPEN</button>
+			<button type="relay" id="relay1" onclick="togglePin(1)">PB 1,SHORTED</button>
+			<button type="relay" id="relay2" onclick="togglePin(2)">PB 2,OPEN</button>
+			<button type="relay" id="relay3" onclick="togglePin(3)">PB 2,SHORTED</button>
+			<button type="relay" id="relay4" onclick="togglePin(4)">PB 3,OPEN</button>
+			<button type="relay" id="relay5" onclick="togglePin(5)">PB 3,SHORTED</button>
+			<button type="relay" id="relay6" onclick="togglePin(6)">PB 4,OPEN</button>
+			<button type="relay" id="relay7" onclick="togglePin(7)">PB 4,SHORTED</button>
+			<button type="relay" id="relay8" onclick="togglePin(8)">PB 5,OPEN</button>
+			<button type="relay" id="relay9" onclick="togglePin(9)">PB 5,SHORTED</button>
+			<button type="relay" id="relay10" onclick="togglePin(10)">PB 6,OPEN</button>
+			<button type="relay" id="relay11" onclick="togglePin(11)">PB 6,SHORTED</button>
 		</div>
-		<div class="button-container" style="grid-column: 2">
-			<button type="relay" id="button00" onclick="togglePin(0,1)">Toggle Relays 1, 2</button>
-			<button type="relay" id="button01" onclick="togglePin(1, 2)">Toggle Relays 2, 3</button>
-			<button type="relay" id="button02" onclick="togglePin(2, 3)">Toggle Relays 3, 4</button>
-			<button type="relay" id="button03" onclick="togglePin(3, 4)">Toggle Relays 4, 5</button>
-			<button type="relay" id="button04" onclick="togglePin(4, 5)">Toggle Relays 5, 6</button>
-			<button type="relay" id="button05" onclick="togglePin(5, 6)">Toggle Relays 6, 7</button>
-			<button type="relay" id="button06" onclick="togglePin(6, 7)">Toggle Relays 7, 8</button>
-			<button type="relay" id="button07" onclick="togglePin(7, 0)">Toggle Relays 8, 1</button>
+		<div class="button-container" style="grid-row: 2">
+			<button type="relay" id="relay12" onclick="togglePin(12)">SW 1,OPEN</button>
+			<button type="relay" id="relay13" onclick="togglePin(13)">SW 1,SHORTED</button>
+			<button type="relay" id="relay14" onclick="togglePin(14)">SW 2 A,OPEN</button>
+			<button type="relay" id="relay15" onclick="togglePin(15)">SW 2 A,SHORTED</button>
+			<button type="relay" id="relay16" onclick="togglePin(16)">SW 2 B,OPEN</button>
+			<button type="relay" id="relay17" onclick="togglePin(17)">SW 2 B,SHORTED</button>
+			<button type="relay" id="relay18" onclick="togglePin(18)">SW 3,OPEN</button>
+			<button type="relay" id="relay19" onclick="togglePin(19)">SW 3,SHORTED</button>
+			<button type="relay" id="relay20" onclick="togglePin(20)">SW 4,OPEN</button>
+			<button type="relay" id="relay21" onclick="togglePin(21)">SW 4,SHORTED</button>
+			<button type="relay" id="relay22" onclick="togglePin(22)">SW 5,OPEN</button>
+			<button type="relay" id="relay23" onclick="togglePin(23)">SW 5,SHORTED</button>
+			<button type="relay" id="relay24" onclick="togglePin(24)">SW 6,OPEN</button>
+			<button type="relay" id="relay25" onclick="togglePin(25)">SW 6,SHORTED</button>
 		</div>
-		<div class="button-container" style="grid-column: 3">
-			<button type="relay" id="button10" onclick="togglePin(0, 2)">Toggle Relays 1, 3</button>
-			<button type="relay" id="button11" onclick="togglePin(1, 3)">Toggle Relays 2, 4</button>
-			<button type="relay" id="button12" onclick="togglePin(2, 4)">Toggle Relays 3, 5</button>
-			<button type="relay" id="button13" onclick="togglePin(3, 5)">Toggle Relays 4, 6</button>
-			<button type="relay" id="button14" onclick="togglePin(4, 6)">Toggle Relays 5, 7</button>
-			<button type="relay" id="button15" onclick="togglePin(5, 7)">Toggle Relays 6, 8</button>
-			<button type="relay" id="button16" onclick="togglePin(6, 0, 3)">Toggle Relays 7, 1, 4</button>
-			<button type="relay" id="button17" onclick="togglePin(7, 1, 4)">Toggle Relays 8, 2, 5</button>			
+		<div class="button-container" style="grid-row: 3">
+			<button type="relay" id="relay26" onclick="togglePin(26)">CR 1 A,OPEN</button>
+			<button type="relay" id="relay27" onclick="togglePin(27)">CR 1 A,SHORTED</button>
+			<button type="relay" id="relay28" onclick="togglePin(28)">CR 1 B,OPEN</button>
+			<button type="relay" id="relay29" onclick="togglePin(29)">CR 1 B,SHORTED</button>
+			<button type="relay" id="relay30" onclick="togglePin(30)">CR 1 C,OPEN</button>
+			<button type="relay" id="relay31" onclick="togglePin(31)">CR 1 C,SHORTED</button>
+			<button type="relay" id="relay32" onclick="togglePin(32)">CR 1 D,OPEN</button>
+			<button type="relay" id="relay33" onclick="togglePin(33)">CR 1 D,SHORTED</button>
+			<button type="relay" id="relay34" onclick="togglePin(34)">CR 2 A,OPEN</button>
+			<button type="relay" id="relay35" onclick="togglePin(35)">CR 2 A,SHORTED</button>
+			<button type="relay" id="relay36" onclick="togglePin(36)">CR 2 B,OPEN</button>
+			<button type="relay" id="relay37" onclick="togglePin(37)">CR 2 B,SHORTED</button>
+			<button type="relay" id="relay38" onclick="togglePin(38)">CR 2 C,OPEN</button>
+			<button type="relay" id="relay39" onclick="togglePin(39)">CR 2 C,SHORTED</button>
+			<button type="relay" id="relay40" onclick="togglePin(40)">CR 2 D,OPEN</button>
+			<button type="relay" id="relay41" onclick="togglePin(41)">CR 2 D,SHORTED</button>
+			<button type="relay" id="relay42" onclick="togglePin(42)">CR 3 A,OPEN</button>
+			<button type="relay" id="relay43" onclick="togglePin(43)">CR 3 A,SHORTED</button>
+			<button type="relay" id="relay44" onclick="togglePin(44)">CR 3 B,OPEN</button>
+			<button type="relay" id="relay45" onclick="togglePin(45)">CR 3 B,SHORTED</button>
+			<button type="relay" id="relay46" onclick="togglePin(46)">CR 3 C,OPEN</button>
+			<button type="relay" id="relay47" onclick="togglePin(47)">CR 3 C,SHORTED</button>
+			<button type="relay" id="relay48" onclick="togglePin(48)">CR 3 D,OPEN</button>
+			<button type="relay" id="relay49" onclick="togglePin(49)">CR 3 D,SHORTED</button>
+			<button type="relay" id="relay50" onclick="togglePin(50)">CR 4 A,OPEN</button>
+			<button type="relay" id="relay51" onclick="togglePin(51)">CR 4 A,SHORTED</button>
+			<button type="relay" id="relay52" onclick="togglePin(52)">CR 4 B,OPEN</button>
+			<button type="relay" id="relay53" onclick="togglePin(53)">CR 4 B,SHORTED</button>
+			<button type="relay" id="relay54" onclick="togglePin(54)">CR 4 C,OPEN</button>
+			<button type="relay" id="relay55" onclick="togglePin(55)">CR 4 C,SHORTED</button>
+			<button type="relay" id="relay56" onclick="togglePin(56)">CR 4 D,OPEN</button>
+			<button type="relay" id="relay57" onclick="togglePin(57)">CR 4 D,SHORTED</button>
 		</div>
-		<div class="button-container" style="grid-column: 4">
-			<button type="relay" id="button20" onclick="togglePin(0, 4)">Toggle Relays 1, 5</button>
-			<button type="relay" id="button21" onclick="togglePin(1, 5)">Toggle Relays 2, 6</button>
-			<button type="relay" id="button22" onclick="togglePin(2, 6)">Toggle Relays 3, 7</button>
-			<button type="relay" id="button24" onclick="togglePin(4, 0, 3)">Toggle Relays 5, 1, 4</button>
-			<button type="relay" id="button25" onclick="togglePin(5, 1, 4)">Toggle Relays 6, 2, 5</button>
-			<button type="relay" id="button26" onclick="togglePin(6, 2, 5)">Toggle Relays 7, 3, 6</button>
-			<button type="relay" id="button27" onclick="togglePin(7, 3, 6)">Toggle Relays 8, 4, 7</button>
-			<button type="relay" id="button23" onclick="clearPins()">Reset all Relays</button>		
+		<div class="button-container" style="grid-row: 4">
+			<button type="relay" id="relay58" onclick="togglePin(58)">MS 1 A,OPEN</button>
+			<button type="relay" id="relay59" onclick="togglePin(59)">MS 1 A,SHORTED</button>
+			<button type="relay" id="relay60" onclick="togglePin(60)">MS 1 B,OPEN</button>
+			<button type="relay" id="relay61" onclick="togglePin(61)">MS 1 B,SHORTED</button>
+			<button type="relay" id="relay62" onclick="togglePin(62)">MS 2 A,OPEN</button>
+			<button type="relay" id="relay63" onclick="togglePin(63)">MS 2 A,SHORTED</button>
+			<button type="relay" id="relay64" onclick="togglePin(64)">MS 2 B,OPEN</button>
+			<button type="relay" id="relay65" onclick="togglePin(65)">MS 2 B,SHORTED</button>
+			<button type="relay" id="relay66" onclick="togglePin(66)">MS 1 OL,OPEN</button>
+			<button type="relay" id="relay67" onclick="togglePin(67)">MS 2 OL,SHORTED</button>	
 		</div>
-		<div class="form-container" style="grid-row: 2; grid-column: 1">
+		<div class="button-container" style="grid-row: 5">
+			<button type="relay" id="relay68" onclick="togglePin(68)">RED,OPEN</button>
+			<button type="relay" id="relay69" onclick="togglePin(69)">GREEN,OPEN</button>
+			<button type="relay" id="relay70" onclick="togglePin(70)">WHITE,OPEN</button>
+			<button type="relay" id="relay71" onclick="togglePin(71)">BLUE,OPEN</button>
+			<button type="relay" id="relay72" onclick="togglePin(72)">YELLOW,OPEN</button>
+			<button type="relay" id="relay73" onclick="togglePin(73)">CR 1,OPEN</button>
+			<button type="relay" id="relay74" onclick="togglePin(74)">CR 2,OPEN</button>
+			<button type="relay" id="relay75" onclick="togglePin(75)">CR 3,OPEN</button>
+			<button type="relay" id="relay76" onclick="togglePin(76)">CR 4,OPEN</button>
+			<button type="relay" id="relay77" onclick="togglePin(77)">MS 1,OPEN</button>
+			<button type="relay" id="relay77" onclick="togglePin(77)">MS 2,OPEN</button>
+		</div>
+	</div>
+	<div class="bottom-container">
+		<div class="form-container" style="grid-row: 5; grid-column: 1">
 			<form action="http://10.0.0.14" style="grid-row: 1">
 	   			<input type="submit" value="10.0.0.14" />
 			</form>
-			<form action="http://10.0.0.15" style="grid-row: 2">
+			<form action="http://10.0.0.15" style="grid-row: 5">
 	   			<input style ="border-top: none" class="formlast" type="submit" value="10.0.0.15" />
 			</form>		
 		</div>
-		<div class="form-container" style="grid-row: 2; grid-column: 4">
+		<div class="form-container" style="grid-row: 5; grid-column: 4">
 			<form action="http://10.0.0.16" style="grid-row: 1">
 	   			<input type="submit" value="10.0.0.16" />
 			</form>
-			<form action="http://10.0.0.17" style="grid-row: 2">
+			<form action="http://10.0.0.17" style="grid-row: 5">
 	   			<input style ="border-top: none" type="submit" value="10.0.0.17" />
 			</form>		
 		</div>
-		<p align="center" style="grid-column: 2 / 4; width: 85%; margin: auto;">
+		<p align="center" style="grid-column: 2 / 4; grid-row: 5; width: 85%; margin: auto;">
 			Copyright &copy; 2017-2018 John R. Craps - All Rights Reserved</br>
 			Unauthorized copying, modification, and/or distribution of this file, via any medium, is strictly prohibited.</br>
-			Version 2.6.0 - For internal use only</br>
+			Version 0.3.6 - For internal use only</br>
 		</p>
 	</div> 
 
