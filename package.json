@@ -14,7 +14,8 @@
   "author": "johnrcraps",
   "license": "Copyright - All Rights Reserved",
   "dependencies": {
-    "array-gpio": "^1.1.63",
-    "socket.io": "^2.0.4"
+    "socket.io": "^2.0.4",
+    "raspi": "*",
+    "raspii2c"; "*"
   }
 }
