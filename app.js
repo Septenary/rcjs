@@ -38,34 +38,47 @@ var server = http.createServer(function (request, response) {
 init(() => {
   const i2c = new I2C();
   console.log(i2c.readByteSync(0x20));
+  console.log(i2c.readByteSync(0x40));
+  console.log(i2c.readByteSync(0x60));
+  console.log(i2c.readByteSync(0x80));
 });
 
 var clearPins = function(){
 	const clr = Buffer([0xff, 0xff])
 	i2c1.i2cWriteSync(0x20, 2, clr);
+  i2c1.i2cWriteSync(0x40, 2, clr);
+  i2c1.i2cWriteSync(0x60, 2, clr);
+  i2c1.i2cWriteSync(0x80, 2, clr);
 };
 clearPins();
 
 var clientUpdate = function (){
-	const rbuf = new Buffer([0x00, 0x00])
-	io.emit('pinUpdate', i2c1.i2cReadSync(0x20, 2, rbuf));
-    console.log(rbuf));
-};
+  const rbufarray = []
+  for (var i = 0; i < rbufarray.length; i++) {
+    rbufarray[i] = new Buffer([0x00, 0x00])
+  };
+	io.emit('pinUpdate', i2c1.i2cReadSync(0x20, 2, rbufarray[0]));
+  io.emit('pinUpdate', i2c1.i2cReadSync(0x40, 2, rbufarray[1]));
+  io.emit('pinUpdate', i2c1.i2cReadSync(0x60, 2, rbufarray[2]));
+  io.emit('pinUpdate', i2c1.i2cReadSync(0x80, 2, rbufarray[3]));
+  console.log(rbufarray);
+  };
 
 var togglePin = function(){
   clearPins();
   //parseInt converts base 16 to dec to normalize input, as raspi-i2c accepts dec. this saves the trouble of converting frontend base 16 (0-F) to hex format (0x00-0xFF). hex format is used in the buffers for clarity.
-  arg = parseInt(arguments[0], 16);
+  rboard = parseInt(arguments[0].split()[0],16);
+  rindex = parseInt(arguments[0].split()[1],16);
+
   if (arg > 8){
-    arg = arg%8;
-    var arg = Math.pow(2,(arg-1));
-    buf = Buffer([0xff-arg, 0xff-0x00]);
+    rindex = rindex%8;
+    var rindex = Math.pow(2,(rindex-1));
+    buf = Buffer([0xff-rindex, 0xff-0x00]);
   } else {
-    var arg = Math.pow(2,(arg-1));
-    buf = Buffer([0xff-0x00, 0xff-arg])
+    var rindex = Math.pow(2,(rindex-1));
+    buf = Buffer([0xff-0x00, 0xff-rindex])
   }
-  //i2c1.i2cReadSync(0x20, 2, rbuf)
-  i2c1.i2cWriteSync(0x20, 2, buf);
+  i2c1.i2cWriteSync(rboard, 2, buf);
 };
 
 var io = require('socket.io')(server);
