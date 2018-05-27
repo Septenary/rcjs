@@ -13,73 +13,77 @@ var I2C = require('raspi-i2c')
 var port = 80
 
 var server = http.createServer(function (request, response) {
-    try { 
-        var requestUrl = url.parse(request.url)
-
-        // need to use path.normalize so people can't access directories underneath baseDirectory
-        var fsPath = baseDirectory+path.normalize(requestUrl.pathname)
+  try {
+    var requestUrl = url.parse(request.url)
+    // normalize path to prevent access to directories underneath baseDirectory
+    var fsPath = baseDirectory+path.normalize(requestUrl.pathname)
     if (fs.statSync(fsPath).isDirectory()) fsPath += '/index.html';
 
-        var fileStream = fs.createReadStream(fsPath)
-        fileStream.pipe(response)
-        fileStream.on('open', function() {
-             response.writeHead(200)
-        })
-        fileStream.on('error',function(e) {
-             response.writeHead(404)     // assume the file doesn't exist
-             response.end()
-        })
-   } catch(e) {
-        response.writeHead(500)
-        response.end()     // end the response so browsers don't hang
-        console.log(e.stack)
-   }
+    var fileStream = fs.createReadStream(fsPath)
+      fileStream.pipe(response)
+      fileStream.on('open', function() {
+           response.writeHead(200)
+      })
+      fileStream.on('error',function(e) {
+           response.writeHead(404)
+           response.end()
+      })
+    } catch(e) {
+      response.writeHead(500)
+      response.end()      // end the response so browsers don't hang
+      console.log(e.stack)
+    }
 });
+//initialize I2C devices
 init(() => {
-   const i2c = new I2C();
-    console.log(i2c.readByteSync(0x20));
+  const i2c = new I2C();
+  console.log(i2c.readByteSync(0x20));
 });
 
 var clearPins = function(){
-    for (var i = 0; i < pinOut.length; i++){
-    pinOut[i].write(1);
-}};
+	const clr = Buffer([0xff, 0xff])
+	i2c1.i2cWriteSync(0x20, 2, clr);
+};
 clearPins();
 
-//var clientUpdate = function (){
-//    for (var i = 0; i < pinOut.length; i++ ){
-//    io.emit('pinUpdate', i, 1-pinOut[i].read());
-//}};
-//
-//var togglePin = function(){
-//	var k = arguments[0]
-//	for (var j = 0; j < k.length; j++){
-//		state = pinOut[k[j]].read()
-//		pinOut[k[j]].write(1-state)
-//	 	//console.log("Relay " +(k[j]+1)+ ": " + state);
-//	}
-//    	clientUpdate();
-//};
-//
-//var io = require('socket.io')(server);
-//server.listen(port);
-//console.log('Server @ 10.0.0.16:'+port);
-//io.on('connect', function(client) { 
-//    console.log('Client connected...'); 
-//    clientUpdate();
-//
-//    client.on('togglePin', function(data) {
-//	//console.log(data)
-//        togglePin(data);
-//    });
-//
-//    client.on('clearPins', function(pin) {
-//        clearPins();
-//   	clientUpdate();
-//    });
-//
-//    setInterval(clientUpdate, 500);
-//
-//});
+var clientUpdate = function (){
+	const rbuf = new Buffer([0x00, 0x00])
+	io.emit('pinUpdate', i2c1.i2cReadSync(0x20, 2, rbuf));
+    console.log(rbuf));
+};
 
+var togglePin = function(){
+  clearPins();
+  //parseInt converts base 16 to dec to normalize input, as raspi-i2c accepts dec. this saves the trouble of converting frontend base 16 (0-F) to hex format (0x00-0xFF). hex format is used in the buffers for clarity.
+  arg = parseInt(arguments[0], 16);
+  if (arg > 8){
+    arg = arg%8;
+    var arg = Math.pow(2,(arg-1));
+    buf = Buffer([0xff-arg, 0xff-0x00]);
+  } else {
+    var arg = Math.pow(2,(arg-1));
+    buf = Buffer([0xff-0x00, 0xff-arg])
+  }
+  //i2c1.i2cReadSync(0x20, 2, rbuf)
+  i2c1.i2cWriteSync(0x20, 2, buf);
+};
 
+var io = require('socket.io')(server);
+server.listen(port);
+console.log('Server @ 10.0.0.16:'+port);
+io.on('connect', function(client) {
+  console.log('Client connected...');
+  clientUpdate();
+
+  client.on('togglePin', function(data) {
+    //console.log(data)
+    togglePin(data);
+  });
+
+  client.on('clearPins', function(pin) {
+    clearPins();
+  });
+
+  setInterval(clientUpdate, 600);
+
+});
