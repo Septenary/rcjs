@@ -1,4 +1,4 @@
 # rcjs
-Relay Controller (Raspberry Pi)
+RCJS (Raspberry Pi)
 
-/home/pi/Desktop/RelayController
+/home/pi/Desktop/rcjs
