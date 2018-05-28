@@ -1,21 +1,42 @@
-{
-  "name": "RelayController",
-  "version": "0.3.6",
-  "description": "controls a relay board",
-  "main": "rc.js",
-  "scripts": {
+{   "name": "rcjs"
+  , "version": "0.5.2"
+  , "description": "controls multiple 16ch relay boards through i2c"
+  , "main": "app.js"
+  , "cpu" : ["arm"]
+
+  { "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
+  }}
+
+  { "keywords": [
     "control",
     "relay",
     "controller"
-  ],
-  "author": "johnrcraps",
-  "license": "Copyright - All Rights Reserved",
-  "dependencies": {
-    "socket.io": "^2.0.4",
-    "raspi": "*",
-    "raspii2c"; "*"
+  ]}
+
+  { "author": "John Craps"
+  , "email": "johnrcraps@gmail.com"
+  , "url": "https://github.com/Septenary"
   }
+
+  { "repository":
+    { "type" : "git"
+    , "url" : "https://github.com/Septenary/rcjs.git"
+    }}
+
+  { "bugs":
+    { "url" : "https://github.com/Septenary/rcjs/issues"
+    , "email": "johnrcraps@gmail.com"
+  }}
+
+  { "license": "SEE LICENSE IN app.js"}
+  { "private": true}
+
+  { "dependencies":
+    {  "socket.io": "^2.0.4"
+    ,  "raspi": "^5.0.2"
+    ,  "raspii2c": "^6.1.2"
+    }
+  }
+
 }
