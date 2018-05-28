@@ -12,6 +12,7 @@ var raspi = require('raspi')
 var I2C = require('raspi-i2c')
 var port = 80
 
+//server configuration
 var server = http.createServer(function (request, response) {
   try {
     var requestUrl = url.parse(request.url)
@@ -34,6 +35,8 @@ var server = http.createServer(function (request, response) {
       console.log(e.stack)
     }
 });
+
+
 //initialize I2C devices
 init(() => {
   const i2c = new I2C();
@@ -43,32 +46,33 @@ init(() => {
   console.log(i2c.readByteSync(0x80));
 });
 
+//clearPins
 var clearPins = function(){
 	const clr = Buffer([0xff, 0xff])
-	i2c1.i2cWriteSync(0x20, 2, clr);
-  i2c1.i2cWriteSync(0x40, 2, clr);
-  i2c1.i2cWriteSync(0x60, 2, clr);
-  i2c1.i2cWriteSync(0x80, 2, clr);
+	i2c1.i2cWriteSync(0x70, 2, clr);
+  i2c1.i2cWriteSync(0x20, 2, clr);
 };
 clearPins();
 
+//clientUpdate
 var clientUpdate = function (){
   const rbufarray = []
   for (var i = 0; i < rbufarray.length; i++) {
     rbufarray[i] = new Buffer([0x00, 0x00])
   };
-	io.emit('pinUpdate', i2c1.i2cReadSync(0x20, 2, rbufarray[0]));
-  io.emit('pinUpdate', i2c1.i2cReadSync(0x40, 2, rbufarray[1]));
-  io.emit('pinUpdate', i2c1.i2cReadSync(0x60, 2, rbufarray[2]));
-  io.emit('pinUpdate', i2c1.i2cReadSync(0x80, 2, rbufarray[3]));
+	io.emit('pinUpdate', i2c1.i2cReadSync(0x70, 2, rbufarray[0]));
   console.log(rbufarray);
   };
 
+//togglePin
 var togglePin = function(){
   clearPins();
   //parseInt converts base 16 to dec to normalize input, as raspi-i2c accepts dec. this saves the trouble of converting frontend base 16 (0-F) to hex format (0x00-0xFF). hex format is used in the buffers for clarity.
   rboard = parseInt(arguments[0].split()[0],16);
   rindex = parseInt(arguments[0].split()[1],16);
+  rboard = [1,2,4,8][rboard]
+
+  i2c1.i2cWriteSync(0x70, 2, buffer([0x04, rboard]))
 
   if (arg > 8){
     rindex = rindex%8;
@@ -78,9 +82,11 @@ var togglePin = function(){
     var rindex = Math.pow(2,(rindex-1));
     buf = Buffer([0xff-0x00, 0xff-rindex])
   }
-  i2c1.i2cWriteSync(rboard, 2, buf);
+  i2c1.i2cWriteSync(0x20, 2, buf);
 };
 
+
+//socketio configuration
 var io = require('socket.io')(server);
 server.listen(port);
 console.log('Server @ 10.0.0.16:'+port);
@@ -98,5 +104,4 @@ io.on('connect', function(client) {
   });
 
   setInterval(clientUpdate, 600);
-
 });
