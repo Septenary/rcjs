@@ -74,13 +74,15 @@ var togglePin = function(){
 
   i2c1.i2cWriteSync(0x70, 2, buffer([0x04, rboard]))
 
-  if (arg > 8){
+  if (0 > arg > 8){
     rindex = rindex%8;
     var rindex = Math.pow(2,(rindex-1));
     buf = Buffer([0xff-rindex, 0xff-0x00]);
-  } else {
+  } elseif (arg > 16) {
     var rindex = Math.pow(2,(rindex-1));
     buf = Buffer([0xff-0x00, 0xff-rindex])
+  } else {
+    console.log('variable "arg" outside of expected range. recieved ('+arg+'); expected range: (0 > "arg" > 16)')
   }
   i2c1.i2cWriteSync(0x20, 2, buf);
 };
