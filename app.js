@@ -1,6 +1,6 @@
 /*  Copyright © 2017-2018 John R. Craps - All Rights Reserved
  *  Unauthorized copying, modification, and/or distribution of this file, via any medium, is strictly prohibited.
- *  Version 0.3.0 - For internal use only
+ *  Version 0.5.2 - For internal use only
  */
 
 var http = require('http')
@@ -40,10 +40,12 @@ var server = http.createServer(function (request, response) {
 //initialize I2C devices
 init(() => {
   const i2c = new I2C();
-  console.log(i2c.readByteSync(0x20));
-  console.log(i2c.readByteSync(0x40));
-  console.log(i2c.readByteSync(0x60));
-  console.log(i2c.readByteSync(0x80));
+  const boards = [1,2,4,8]
+  for (var i = 0; i < boards.length; i++) {
+    boards[i]
+    i2c1.i2cWriteSync(0x70, 2, buffer([0x04, boards[i]]));
+    console.log(i2c.readByteSync(0x20));
+  }
 });
 
 //clearPins
@@ -56,13 +58,11 @@ clearPins();
 
 //clientUpdate
 var clientUpdate = function (){
-  const rbufarray = []
-  for (var i = 0; i < rbufarray.length; i++) {
-    rbufarray[i] = new Buffer([0x00, 0x00])
-  };
-	io.emit('pinUpdate', i2c1.i2cReadSync(0x70, 2, rbufarray[0]));
-  console.log(rbufarray);
-  };
+  for (var i = 0; i < boards.length; i++) {
+    i2c1.i2cWriteSync(0x70, 2, buffer([0x04, boards[i]]));
+    console.log(i2c.readByteSync(0x20,2));
+  }
+};
 
 //togglePin
 var togglePin = function(){
@@ -70,9 +70,9 @@ var togglePin = function(){
   //parseInt converts base 16 to dec to normalize input, as raspi-i2c accepts dec. this saves the trouble of converting frontend base 16 (0-F) to hex format (0x00-0xFF). hex format is used in the buffers for clarity.
   rboard = parseInt(arguments[0].split()[0],16);
   rindex = parseInt(arguments[0].split()[1],16);
-  rboard = [1,2,4,8][rboard]
+  rboard = boards[rboard];
 
-  i2c1.i2cWriteSync(0x70, 2, buffer([0x04, rboard]))
+  i2c1.i2cWriteSync(0x70, 2, buffer([0x04, rboard]));
 
   if (0 > arg > 8){
     rindex = rindex%8;
