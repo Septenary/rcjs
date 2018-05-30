@@ -48,6 +48,8 @@ init(() => {
   }
 });
 
+//i2c1 usage is unclear, consult documentation for raspi-i2c for clarity of its use cases here.
+
 //clearPins
 var clearPins = function(){
 	const clr = Buffer([0xff, 0xff])
@@ -67,7 +69,7 @@ var clientUpdate = function (){
 //togglePin
 var togglePin = function(){
   clearPins();
-  //parseInt converts base 16 to dec to normalize input, as raspi-i2c accepts dec. this saves the trouble of converting frontend base 16 (0-F) to hex format (0x00-0xFF). hex format is used in the buffers for clarity.
+  //parseInt converts base 16 to dec to normalize input, as raspi-i2c accepts dec. this saves the trouble of converting frontend base 16 (0-F) to hex format (0x00-0xFF), which is normally prefered due to clarity. this clarity is preserved in the format of the buffers.
   rboard = parseInt(arguments[0].split()[0],16);
   rindex = parseInt(arguments[0].split()[1],16);
   rboard = boards[rboard];
