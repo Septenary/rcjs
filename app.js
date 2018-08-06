@@ -42,7 +42,6 @@ init(() => {
   const i2c = new I2C();
   const boards = [1,2,4,8]
   for (var i = 0; i < boards.length; i++) {
-    boards[i]
     i2c1.i2cWriteSync(0x70, 2, buffer([0x04, boards[i]]));
     console.log(i2c.readByteSync(0x20));
   }
