@@ -34,6 +34,6 @@
   , "dependencies":
     {  "socket.io": "^2.0.4"
     ,  "raspi": "^5.0.2"
-    ,  "raspii2c": "^6.1.2"
+    ,  "raspi-i2c": "^6.1.2"
   }
 }

@@ -79,7 +79,7 @@ var togglePin = function(){
     rindex = rindex%8;
     var rindex = Math.pow(2,(rindex-1));
     buf = Buffer([0xff-rindex, 0xff-0x00]);
-  } elseif (arg > 16) {
+  } else if (arg > 16) {
     var rindex = Math.pow(2,(rindex-1));
     buf = Buffer([0xff-0x00, 0xff-rindex])
   } else {
