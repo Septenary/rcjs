@@ -3,40 +3,37 @@
   , "description": "controls multiple 16ch relay boards through i2c"
   , "main": "app.js"
   , "cpu" : ["arm"]
-
-  { "scripts": {
+  , "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  }}
-
-  { "keywords": [
+  }
+  , "keywords": [
     "control",
     "relay",
     "controller"
-  ]}
+  ]
 
-  { "author": "John Craps"
+  , "author": {
+    "name": "John Craps"
   , "email": "johnrcraps@gmail.com"
   , "url": "https://github.com/Septenary"
   }
 
-  { "repository":
-    { "type" : "git"
-    , "url" : "https://github.com/Septenary/rcjs.git"
-    }}
+  , "repository":
+  { "type" : "git"
+  , "url" : "https://github.com/Septenary/rcjs.git"
+  }
 
-  { "bugs":
+  , "bugs":
     { "url" : "https://github.com/Septenary/rcjs/issues"
     , "email": "johnrcraps@gmail.com"
-  }}
+  }
 
-  { "license": "SEE LICENSE IN app.js"}
-  { "private": true}
+  ,"license": "SEE LICENSE IN app.js"
+  ,"private": true
 
-  { "dependencies":
+  , "dependencies":
     {  "socket.io": "^2.0.4"
     ,  "raspi": "^5.0.2"
     ,  "raspii2c": "^6.1.2"
-    }
   }
-
 }
