@@ -94,120 +94,34 @@
   </script>
   </div>
   <div class="grid-container">
-  <div class="button-container" style="grid-row: 1; grid-column:1;padding-right:1px;grid-template-columns: repeat(2, 1fr);">
-      <button type="relay" id="relay00" onclick="toggleRelay(00)">PB 1 OPEN</button>
-      <button type="relay" id="relay01" onclick="toggleRelay(01)">PB 1 SHORTED</button>
-      <button type="relay" id="relay02" onclick="toggleRelay(02)">PB 2 OPEN</button>
-      <button type="relay" id="relay03" onclick="toggleRelay(03)">PB 2 SHORTED</button>
-      <button type="relay" id="relay04" onclick="toggleRelay(04)">PB 3 OPEN</button>
-      <button type="relay" id="relay05" onclick="toggleRelay(05)">PB 3 SHORTED</button>
-      <button type="relay" id="relay06" onclick="toggleRelay(06)">PB 4 OPEN</button>
-      <button type="relay" id="relay07" onclick="toggleRelay(07)">PB 4 SHORTED</button>
-      <button type="relay" id="relay08" onclick="toggleRelay(08)">PB 5 OPEN</button>
-      <button type="relay" id="relay09" onclick="toggleRelay(09)">PB 5 SHORTED</button>
-      <button type="relay" id="relay0A" onclick="toggleRelay(0A)">PB 6 OPEN</button>
-      <button type="relay" id="relay0B" onclick="toggleRelay(0B)">PB 6 SHORTED</button>
+  <div class="button-container" style="grid-row: 1; grid-column:1;padding-right:1px;grid-template-columns: repeat(1, 1fr);">
+      <button type="reset" id="reset" onclick="Clear()">Reset</button>
+      <button type="relay" id="relay1K01" onclick="toggleRelay('04ffbf')">Shorted</button>
+      <button type="relay" id="relay1K02" onclick="toggleRelay('04feff')">No Power</button>
+      <button type="relay" id="relay1K03" onclick="toggleRelay('04fdff')">Open</button>
+      <button type="relay" id="relay1K04" onclick="toggleRelay('04ffdf')">Open Field Wiring</button>
+      <button type="relay" id="relay1K05" onclick="toggleRelay('04fbff')">No Power</button>
+      <button type="relay" id="relay1K06" onclick="toggleRelay('04ffef')">Shorted</button>
+      <button type="relay" id="relay1K07" onclick="toggleRelay('04f7ff')">Open</button>
+      <button type="relay" id="relay1K08" onclick="toggleRelay('04fff7')">Open Field Wiring</button>
+      <button type="relay" id="relay1K09" onclick="toggleRelay('04efff')">No Power</button>
+      <button type="relay" id="relay1K10" onclick="toggleRelay('04fffb')">Shorted</button>
+      <button type="relay" id="relay1K11" onclick="toggleRelay('04dfff')">Open</button>
+      <button type="relay" id="relay1K12" onclick="toggleRelay('04ffdf')">Open Field Wiring</button>
+      <button type="relay" id="relay1K13" onclick="toggleRelay('04bfff')">No Power</button>
+      <button type="relay" id="relay1K14" onclick="toggleRelay('04fffe')">Shorted</button>
+      <button type="relay" id="relay1K15" onclick="toggleRelay('047fff')">Open</button>
+      <button type="relay" id="relay1K16" onclick="toggleRelay('04ff7f')">Open Field Wiring</button>
     </div>
-    <div class="button-container" style="grid-row: 2;grid-column:1/3; grid-template-columns: repeat(4, 1fr);">
-      <button type="relay" id="relay0C" onclick="toggleRelay(0C)">SW 1 A OPEN</button>
-      <button type="relay" id="relay0D" onclick="toggleRelay(0D)">SW 1 A SHORTED</button>
-      <button type="relay" id="relay0E" onclick="toggleRelay(0E)">SW 1 B OPEN</button>
-      <button type="relay" id="relay0F" onclick="toggleRelay(0F)">SW 1 B SHORTED</button>
-      <button type="relay" id="relay10" onclick="toggleRelay(10)">SW 2 A OPEN</button>
-      <button type="relay" id="relay11" onclick="toggleRelay(11)">SW 2 A SHORTED</button>
-      <button type="relay" id="relay12" onclick="toggleRelay(12)">SW 2 B OPEN</button>
-      <button type="relay" id="relay13" onclick="toggleRelay(13)">SW 2 B SHORTED</button>
-      <button type="relay" id="relay14" onclick="toggleRelay(14)">SW 3 OPEN</button>
-      <button type="relay" id="relay15" onclick="toggleRelay(15)">SW 3 SHORTED</button>
-      <button type="relay" id="relay16" onclick="toggleRelay(16)">SW 4 OPEN</button>
-      <button type="relay" id="relay17" onclick="toggleRelay(17)">SW 4 SHORTED</button>
-      <button type="relay" id="relay18" onclick="toggleRelay(18)">SW 5 OPEN</button>
-      <button type="relay" id="relay19" onclick="toggleRelay(19)">SW 5 SHORTED</button>
-      <button type="relay" id="relay1A" onclick="toggleRelay(1A)">SW 6 OPEN</button>
-      <button type="relay" id="relay1B" onclick="toggleRelay(1B)">SW 6 SHORTED</button>
-    </div>
-    <div class="button-container" style="grid-row: 3;grid-column:1/3; grid-template-columns: repeat(4, 1fr);">
-      <button type="relay" id="relay1C" onclick="toggleRelay(1C)">CR 1 A OPEN</button>
-      <button type="relay" id="relay1D" onclick="toggleRelay(1D)">CR 1 A SHORTED</button>
-      <button type="relay" id="relay1E" onclick="toggleRelay(1E)">CR 1 B OPEN</button>
-      <button type="relay" id="relay1F" onclick="toggleRelay(1F)">CR 1 B SHORTED</button>
-      <button type="relay" id="relay20" onclick="toggleRelay(20)">CR 1 C OPEN</button>
-      <button type="relay" id="relay21" onclick="toggleRelay(21)">CR 1 C SHORTED</button>
-      <button type="relay" id="relay22" onclick="toggleRelay(22)">CR 1 D OPEN</button>
-      <button type="relay" id="relay23" onclick="toggleRelay(23)">CR 1 D SHORTED</button>
-      <button type="relay" id="relay24" onclick="toggleRelay(24)">CR 2 A OPEN</button>
-      <button type="relay" id="relay25" onclick="toggleRelay(25)">CR 2 A SHORTED</button>
-      <button type="relay" id="relay26" onclick="toggleRelay(26)">CR 2 B OPEN</button>
-      <button type="relay" id="relay27" onclick="toggleRelay(27)">CR 2 B SHORTED</button>
-      <button type="relay" id="relay28" onclick="toggleRelay(28)">CR 2 C OPEN</button>
-      <button type="relay" id="relay29" onclick="toggleRelay(29)">CR 2 C SHORTED</button>
-      <button type="relay" id="relay2A" onclick="toggleRelay(2A)">CR 2 D OPEN</button>
-      <button type="relay" id="relay2B" onclick="toggleRelay(2B)">CR 2 D SHORTED</button>
-      <button type="relay" id="relay2C" onclick="toggleRelay(2C)">CR 3 A OPEN</button>
-      <button type="relay" id="relay2D" onclick="toggleRelay(2D)">CR 3 A SHORTED</button>
-      <button type="relay" id="relay2E" onclick="toggleRelay(2E)">CR 3 B OPEN</button>
-      <button type="relay" id="relay2F" onclick="toggleRelay(2F)">CR 3 B SHORTED</button>
-      <button type="relay" id="relay30" onclick="toggleRelay(30)">CR 3 C OPEN</button>
-      <button type="relay" id="relay31" onclick="toggleRelay(31)">CR 3 C SHORTED</button>
-      <button type="relay" id="relay32" onclick="toggleRelay(32)">CR 3 D OPEN</button>
-      <button type="relay" id="relay33" onclick="toggleRelay(33)">CR 3 D SHORTED</button>
-      <button type="relay" id="relay34" onclick="toggleRelay(34)">CR 4 A OPEN</button>
-      <button type="relay" id="relay35" onclick="toggleRelay(35)">CR 4 A SHORTED</button>
-      <button type="relay" id="relay36" onclick="toggleRelay(36)">CR 4 B OPEN</button>
-      <button type="relay" id="relay37" onclick="toggleRelay(37)">CR 4 B SHORTED</button>
-      <button type="relay" id="relay38" onclick="toggleRelay(38)">CR 4 C OPEN</button>
-      <button type="relay" id="relay39" onclick="toggleRelay(39)">CR 4 C SHORTED</button>
-      <button type="relay" id="relay3A" onclick="toggleRelay(3A)">CR 4 D OPEN</button>
-      <button type="relay" id="relay3B" onclick="toggleRelay(3B)">CR 4 D SHORTED</button>
-      <button type="relay" id="relay3C" onclick="toggleRelay(3C)">CR 1 OPEN</button>
-      <button type="relay" id="relay3D" onclick="toggleRelay(3D)">CR 2 OPEN</button>
-      <button type="relay" id="relay3E" onclick="toggleRelay(3E)">CR 3 OPEN</button>
-      <button type="relay" id="relay3F" onclick="toggleRelay(3F)">CR 4 OPEN</button>
-    </div>
-    <div class="button-container" style="grid-row: 1;grid-column:2;padding-left:1px;grid-template-columns: 1fr;">
-      <button type="reset">RESET</button>
-      <button type="relay" id="relay40" onclick="toggleRelay(40)">RED OPEN</button>
-      <button type="relay" id="relay41" onclick="toggleRelay(41)">GREEN OPEN</button>
-      <button type="relay" id="relay42" onclick="toggleRelay(42)">WHITE OPEN</button>
-      <button type="relay" id="relay43" onclick="toggleRelay(43)">BLUE OPEN</button>
-      <button type="relay" id="relay44" onclick="toggleRelay(44)">YELLOW OPEN</button>
-    </div>
-  </div>
-  <div class="bottom-container">
-    <div class="form-container" style="grid-row: 5; grid-column: 1">
-      <form action="http://10.0.0.14" style="grid-row: 1">
-        <input type="submit" value="10.0.0.14" />
-      </form>
-      <form action="http://10.0.0.15" style="grid-row: 5">
-        <input style ="border-top: none" class="formlast" type="submit" value="10.0.0.15" />
-      </form>
-    </div>
-    <div class="form-container" style="grid-row: 5; grid-column: 4">
-      <form action="http://10.0.0.16" style="grid-row: 1">
-        <input type="submit" value="10.0.0.16" />
-      </form>
-      <form action="http://10.0.0.17" style="grid-row: 5">
-        <input style ="border-top: none" type="submit" value="10.0.0.17" />
-      </form>
-    </div>
-    <p align="center" style="grid-column: 2 / 4; grid-row: 5; width: 85%; margin: auto;">
-      Copyright &copy; 2017-2018 John R. Craps - All Rights Reserved</br>
-      Unauthorized copying, modification, and/or distribution of this file, via any medium, is strictly prohibited.</br>
-      Version 0.5.2 - For internal use only</br>
-    </p>
-  </div>
+
 
   <script>
-  function togglePin(...args){
-    socket.emit(('togglePin'), args)
+  function toggleRelay(...args){
+    socket.emit(('toggleRelay'), args)
   };
-  function clearPins(){socket.emit('clearPins')};
-  socket.on('pinUpdate', function(pin, state){
-    if (state == 1){
-      document.getElementById("relay"+pin).style.color = '#B23151'
-    } else {
-      document.getElementById("relay"+pin).style.color = 'white'
-    }});
+  function Clear(){
+    socket.emit('clear')
+  };
   </script>
 
 </body>

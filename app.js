@@ -9,7 +9,7 @@ var fs = require('fs')
 var path = require('path')
 var baseDirectory = __dirname
 var raspi = require('raspi')
-var I2C = require('raspi-i2c')
+var I2C = require('raspi-i2c').I2C;
 var port = 80
 
 //server configuration
@@ -35,76 +35,64 @@ var server = http.createServer(function (request, response) {
       console.log(e.stack)
     }
 });
-
+ 
 
 //initialize I2C devices
-init(() => {
-  const i2c = new I2C();
-  const boards = [1,2,4,8]
-  for (var i = 0; i < boards.length; i++) {
-    i2c1.i2cWriteSync(0x70, 2, buffer([0x04, boards[i]]));
-    console.log(i2c.readByteSync(0x20));
-  }
+var i2c = new I2C();
+  const read = new Array();
+  const boards = ['04','08','16','02','01']
+raspi.init(() => {
+  clientUpdate();
+  clear();
+  clientUpdate();
 });
 
-//i2c1 usage is unclear, consult documentation for raspi-i2c for clarity of its use cases here.
-
-//clearPins
-var clearPins = function(){
-	const clr = Buffer([0xff, 0xff])
-	i2c1.i2cWriteSync(0x70, 2, clr);
-  i2c1.i2cWriteSync(0x20, 2, clr);
+//clear
+function clear(){
+	i2c.writeByteSync(0x70, 0x04, 0xff);
+  	i2c.writeByteSync(0x20, 0xff, 0xff);
 };
-clearPins();
 
 //clientUpdate
-var clientUpdate = function (){
+function clientUpdate(){
   for (var i = 0; i < boards.length; i++) {
-    i2c1.i2cWriteSync(0x70, 2, buffer([0x04, boards[i]]));
-    console.log(i2c.readByteSync(0x20,2));
-  }
+    i2c.writeSync(0x70, Buffer.from([0x04, boards[i]]));
+    read[i] = boards[i] + i2c.readWordSync(0x20).toString(16);
+  };
+  console.log(read);
+
 };
 
-//togglePin
-var togglePin = function(){
-  clearPins();
-  //parseInt converts base 16 to dec to normalize input, as raspi-i2c accepts dec. this saves the trouble of converting frontend base 16 (0-F) to hex format (0x00-0xFF), which is normally prefered due to clarity. this clarity is preserved in the format of the buffers.
-  rboard = parseInt(arguments[0].split()[0],16);
-  rindex = parseInt(arguments[0].split()[1],16);
-  rboard = boards[rboard];
-
-  i2c1.i2cWriteSync(0x70, 2, buffer([0x04, rboard]));
-
-  if (0 > arg > 8){
-    rindex = rindex%8;
-    var rindex = Math.pow(2,(rindex-1));
-    buf = Buffer([0xff-rindex, 0xff-0x00]);
-  } else if (arg > 16) {
-    var rindex = Math.pow(2,(rindex-1));
-    buf = Buffer([0xff-0x00, 0xff-rindex])
-  } else {
-    console.log('variable "arg" outside of expected range. recieved ('+arg+'); expected range: (0 > "arg" > 16)')
-  }
-  i2c1.i2cWriteSync(0x20, 2, buf);
+//toggleRelay
+function toggleRelay(location){
+  location = location.toString();
+  let relayBoard = parseInt(location.slice(0,2),16);
+  let firstByte = parseInt(location.slice(2,4),16);
+  let secondByte = parseInt(location.slice(4,6),16);
+	console.log(relayBoard, firstByte, secondByte);
+  //let target = read.indexOf(boards.indexOf("0"+relayBoard)).toString();
+  //console.log(target);
+  //firstByte = target.slice(2,4) - firstByte;
+  //secondByte = target.slice(4,6) - secondByte;
+  i2c.writeByteSync(0x70, 0x04, relayBoard);
+  i2c.writeByteSync(0x20, secondByte, firstByte);
 };
-
 
 //socketio configuration
 var io = require('socket.io')(server);
 server.listen(port);
 console.log('Server @ 10.0.0.16:'+port);
-io.on('connect', function(client) {
-  console.log('Client connected...');
-  clientUpdate();
+setInterval(clientUpdate, 1500);
+io.on('connect', function(client) { 
+    console.log('Client connected...'); 
 
-  client.on('togglePin', function(data) {
-    //console.log(data)
-    togglePin(data);
+    client.on('toggleRelay', function(location) {
+	console.log(location);
+        toggleRelay(location);
+    });
+  client.on('clear', function(aaa) {
+	console.log("Reset!")
+    	clear();
   });
 
-  client.on('clearPins', function(pin) {
-    clearPins();
-  });
-
-  setInterval(clientUpdate, 600);
 });
