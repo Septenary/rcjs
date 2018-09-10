@@ -69,7 +69,7 @@ function toggleRelay(location){
   let relayBoard = parseInt(location.slice(0,2),16);
   let firstByte = parseInt(location.slice(2,4),16);
   let secondByte = parseInt(location.slice(4,6),16);
-	console.log(relayBoard, firstByte, secondByte);
+  //console.log(relayBoard, firstByte, secondByte);
   //let target = read.indexOf(boards.indexOf("0"+relayBoard)).toString();
   //console.log(target);
   //firstByte = target.slice(2,4) - firstByte;

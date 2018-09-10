@@ -59,7 +59,7 @@
   }
   .button-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-auto-flow: column;
   background-color: #000;
   padding: 2px;
   grid-gap: 2px;
@@ -75,6 +75,12 @@
   font-family: "Lucida Console", Monaco, monospace;
   border: 1px solid black;
   }
+  .button-container p {
+  color:white;
+  margin:0px;
+  text-align: center;
+  height:2px;
+ }
   button[type="reset"] {
     background-color: cadetblue;
   }
@@ -94,26 +100,123 @@
   </script>
   </div>
   <div class="grid-container">
-  <div class="button-container" style="grid-row: 1; grid-column:1;padding-right:1px;grid-template-columns: repeat(1, 1fr);">
-      <button type="reset" id="reset" onclick="Clear()">Reset</button>
-      <button type="relay" id="relay1K01" onclick="toggleRelay('04ffbf')">Shorted</button>
-      <button type="relay" id="relay1K02" onclick="toggleRelay('04feff')">No Power</button>
-      <button type="relay" id="relay1K03" onclick="toggleRelay('04fdff')">Open</button>
-      <button type="relay" id="relay1K04" onclick="toggleRelay('04ffdf')">Open Field Wiring</button>
-      <button type="relay" id="relay1K05" onclick="toggleRelay('04fbff')">No Power</button>
-      <button type="relay" id="relay1K06" onclick="toggleRelay('04ffef')">Shorted</button>
-      <button type="relay" id="relay1K07" onclick="toggleRelay('04f7ff')">Open</button>
-      <button type="relay" id="relay1K08" onclick="toggleRelay('04fff7')">Open Field Wiring</button>
-      <button type="relay" id="relay1K09" onclick="toggleRelay('04efff')">No Power</button>
-      <button type="relay" id="relay1K10" onclick="toggleRelay('04fffb')">Shorted</button>
-      <button type="relay" id="relay1K11" onclick="toggleRelay('04dfff')">Open</button>
-      <button type="relay" id="relay1K12" onclick="toggleRelay('04ffdf')">Open Field Wiring</button>
-      <button type="relay" id="relay1K13" onclick="toggleRelay('04bfff')">No Power</button>
-      <button type="relay" id="relay1K14" onclick="toggleRelay('04fffe')">Shorted</button>
-      <button type="relay" id="relay1K15" onclick="toggleRelay('047fff')">Open</button>
-      <button type="relay" id="relay1K16" onclick="toggleRelay('04ff7f')">Open Field Wiring</button>
-    </div>
+  <div class="button-container" style="grid-row: 1; grid-column:1/3;grid-template-columns: repeat(1, 1fr);">
+    <button type="reset" id="reset" onclick="Clear()">Reset</button>
+  </div>
 
+  <div class="button-container" style="grid-row: 2; grid-column:1/3;grid-template-rows: repeat(8, 1fr);">
+      <button type="relay" id="relay1K01" onclick="toggleRelay('04feff')">PB 1 NC No Power</button>
+      <button type="relay" id="relay1K03" onclick="toggleRelay('04fdff')">PB 1 NC Open</button>
+      <button type="relay" id="relay1K02" onclick="toggleRelay('04ffbf')">PB 1 NC Shorted</button>
+      <button type="relay" id="relay1K04" onclick="toggleRelay('04ffdf')">PB 1 NC Field Wiring</button>
+      <button type="relay" id="relay1K05" onclick="toggleRelay('04fbff')">PB 1 NO No Power</button>
+      <button type="relay" id="relay1K07" onclick="toggleRelay('04f7ff')">PB 1 NO Open</button>
+      <button type="relay" id="relay1K06" onclick="toggleRelay('04ffef')">PB 1 NO Shorted</button>
+      <button type="relay" id="relay1K08" onclick="toggleRelay('04fff7')">PB 1 NO Field Wiring</button>
+      <button type="relay" id="relay1K09" onclick="toggleRelay('04efff')">PB 2 NC No Power</button>
+      <button type="relay" id="relay1K11" onclick="toggleRelay('04dfff')">PB 2 NC Open</button>
+      <button type="relay" id="relay1K10" onclick="toggleRelay('04fffb')">PB 2 NC Shorted</button>
+      <button type="relay" id="relay1K12" onclick="toggleRelay('04fffd')">PB 2 NC Field Wiring</button>
+      <button type="relay" id="relay1K13" onclick="toggleRelay('04bfff')">PB 2 NO No Power</button>
+      <button type="relay" id="relay1K15" onclick="toggleRelay('047fff')">PB 2 NO Open</button>
+      <button type="relay" id="relay1K14" onclick="toggleRelay('04fffe')">PB 2 NO Shorted</button>
+      <button type="relay" id="relay1K16" onclick="toggleRelay('04ff7f')">PB 2 NO Field Wiring</button>
+      <button type="relay" id="relay2K01" onclick="toggleRelay('08feff')">PB 3 NC No Power</button>
+      <button type="relay" id="relay2K03" onclick="toggleRelay('08fdff')">PB 3 NC Open</button>
+      <button type="relay" id="relay2K02" onclick="toggleRelay('08ffbf')">PB 3 NC Shorted</button>
+      <button type="relay" id="relay2K04" onclick="toggleRelay('08ffdf')">PB 3 NC Field Wiring</button>
+      <button type="relay" id="relay2K05" onclick="toggleRelay('08fbff')">PB 3 NO No Power</button>
+      <button type="relay" id="relay2K07" onclick="toggleRelay('08f7ff')">PB 3 NO Open</button>
+      <button type="relay" id="relay2K06" onclick="toggleRelay('08ffef')">PB 3 NO Shorted</button>
+      <button type="relay" id="relay2K08" onclick="toggleRelay('08fff7')">PB 3 NO Field Wiring</button>
+      <button type="relay" id="relay2K09" onclick="toggleRelay('08efff')">PB 4 NC No Power</button>
+      <button type="relay" id="relay2K11" onclick="toggleRelay('08dfff')">PB 4 NC Open</button>
+      <button type="relay" id="relay2K10" onclick="toggleRelay('08fffb')">PB 4 NC Shorted</button>
+      <button type="relay" id="relay2K12" onclick="toggleRelay('08fffd')">PB 4 NC Field Wiring</button>
+      <button type="relay" id="relay2K13" onclick="toggleRelay('08bfff')">PB 4 NO No Power</button>
+      <button type="relay" id="relay2K15" onclick="toggleRelay('087fff')">PB 4 NO Open</button>
+      <button type="relay" id="relay2K14" onclick="toggleRelay('08fffe')">PB 4 NO Shorted</button>
+      <button type="relay" id="relay2K16" onclick="toggleRelay('08ff7f')">PB 4 NO Field Wiring</button>
+    </div>
+    <div class="button-container" style="grid-row: 3;grid-column:1/3; grid-template-rows: repeat(4, 1fr);">
+      <button type="relay" id="relay3K01" onclick="toggleRelay('10feff')">HOA - A No Power</button>
+      <button type="relay" id="relay3K03" onclick="toggleRelay('10fdff')">HOA - A Open</button>
+      <button type="relay" id="relay3K02" onclick="toggleRelay('10ffbf')">HOA - A Shorted</button>
+      <button type="relay" id="relay3K04" onclick="toggleRelay('10ffdf')">HOA - A Open Field Wiring</button>
+      <button type="relay" id="relay3K05" onclick="toggleRelay('10fbff')">HOA - H No Power</button>
+      <button type="relay" id="relay3K07" onclick="toggleRelay('10f7ff')">HOA - H Open</button>
+      <button type="relay" id="relay3K06" onclick="toggleRelay('10ffef')">HOA - H Shorted</button>
+      <button type="relay" id="relay3K08" onclick="toggleRelay('10fff7')">HOA - H Open Field Wiring</button>
+      <button type="relay" id="relay3K09" onclick="toggleRelay('10efff')">SS - OFF No Power</button>
+      <button type="relay" id="relay3K11" onclick="toggleRelay('10dfff')">SS - OFF Open</button>
+      <button type="relay" id="relay3K10" onclick="toggleRelay('10fffb')">SS - OFF Shorted</button>
+      <button type="relay" id="relay3K12" onclick="toggleRelay('10fffd')">SS - OFF Field Wiring</button>
+      <button type="relay" id="relay3K13" onclick="toggleRelay('10bfff')">SS - ON No Power</button>
+      <button type="relay" id="relay3K15" onclick="toggleRelay('107fff')">SS - ON Open</button>
+      <button type="relay" id="relay3K14" onclick="toggleRelay('10fffe')">SS - ON Shorted</button>
+      <button type="relay" id="relay3K16" onclick="toggleRelay('10ff7f')">SS - ON Field Wiring</button>
+    </div>
+    <div class="button-container" style="grid-row: 4;grid-column:1/3; grid-template-rows: repeat(6, 1fr);">
+      <button type="relay" id="relay4K01" onclick="toggleRelay('02feff')">PL1 Field Wiring Hot</button>
+      <button type="relay" id="relay4K02" onclick="toggleRelay('02ffbf')">PL1 Open Light</button>
+      <button type="relay" id="relay4K03" onclick="toggleRelay('02fdff')">PL1 Open Return</button>
+      <button type="relay" id="relay4K16" onclick="toggleRelay('02ff7f')">PL6 Field Wiring Hot</button>
+      <button type="relay" id="relay5K01" onclick="toggleRelay('01feff')">PL6 Open Light</button>
+      <button type="relay" id="relay5K02" onclick="toggleRelay('01ffbf')">PL6 Open Return</button>
+      <button type="relay" id="relay4K04" onclick="toggleRelay('02ffdf')">PL2 Field Wiring Hot</button>
+      <button type="relay" id="relay4K05" onclick="toggleRelay('02fbff')">PL2 Open Light</button>
+      <button type="relay" id="relay4K06" onclick="toggleRelay('02ffef')">PL2 Open Return</button>
+      <button type="relay" id="relay5K03" onclick="toggleRelay('01fdff')">PL7 Field Wiring Hot</button>
+      <button type="relay" id="relay5K04" onclick="toggleRelay('01ffdf')">PL7 Open Light</button>
+      <button type="relay" id="relay5K05" onclick="toggleRelay('01fbff')">PL7 Open Return</button>
+      <button type="relay" id="relay4K07" onclick="toggleRelay('02f7ff')">PL3 Field Wiring Hot</button>
+      <button type="relay" id="relay4K08" onclick="toggleRelay('02fff7')">PL3 Open Light</button>
+      <button type="relay" id="relay4K09" onclick="toggleRelay('02efff')">PL3 Open Return</button>
+      <button type="relay" id="relay5K06" onclick="toggleRelay('01ffef')">PL8 Field Wiring Hot</button>
+      <button type="relay" id="relay5K07" onclick="toggleRelay('01f7ff')">PL8 Open Light</button>
+      <button type="relay" id="relay5K08" onclick="toggleRelay('01fff7')">PL8 Open Return</button>
+      <button type="relay" id="relay4K10" onclick="toggleRelay('02fffb')">PL4 Field Wiring Hot</button>
+      <button type="relay" id="relay4K11" onclick="toggleRelay('02dfff')">PL4 Open Light</button>
+      <button type="relay" id="relay4K12" onclick="toggleRelay('02fffd')">PL4 Open Return</button>
+      <button type="relay" id="relay5K09" onclick="toggleRelay('01efff')">PL9 Field Wiring Hot</button>
+      <button type="relay" id="relay5K10" onclick="toggleRelay('017fff')">PL9 Open Light</button>
+      <button type="relay" id="relay5K11" onclick="toggleRelay('01dfff')">PL9 Open Return</button>
+      <button type="relay" id="relay4K13" onclick="toggleRelay('02bfff')">PL5 Field Wiring Hot</button>
+      <button type="relay" id="relay4K14" onclick="toggleRelay('02fffe')">PL5 Open Light</button>
+      <button type="relay" id="relay4K15" onclick="toggleRelay('027fff')">PL5 Open Return</button>
+      <button type="relay" id="relay5K12" onclick="toggleRelay('01fffd')">PL10 Field Wiring Hot</button>
+      <button type="relay" id="relay5K13" onclick="toggleRelay('01bfff')">PL10 Open Light</button>
+      <button type="relay" id="relay5K14" onclick="toggleRelay('01fffe')">PL10 Open Return</button>
+    </div>
+    <div class="button-container" style="grid-row: 5;grid-column:2;padding-left:1px;grid-template-rows: 1fr;">
+      <button type="reset">RESET</button>
+      <button type="relay" id="relay5K15" onclick="toggleRelay('017fff')">AAA</button>
+      <button type="relay" id="relay5K16" onclick="toggleRelay('01ff7f')">BBB</button>
+    </div>
+  </div>
+    <div class="bottom-container">
+      <div class="form-container" style="grid-row: 5; grid-column: 1">
+        <form action="http://10.0.0.14" style="grid-row: 1">
+          <input type="submit" value="10.0.0.14" />
+        </form>
+        <form action="http://10.0.0.15" style="grid-row: 5">
+          <input style ="border-top: none" class="formlast" type="submit" value="10.0.0.15" />
+        </form>
+      </div>
+      <div class="form-container" style="grid-row: 5; grid-column: 4">
+        <form action="http://10.0.0.16" style="grid-row: 1">
+          <input type="submit" value="10.0.0.16" />
+        </form>
+        <form action="http://10.0.0.17" style="grid-row: 5">
+          <input style ="border-top: none" type="submit" value="10.0.0.17" />
+        </form>
+      </div>
+      <p align="center" style="grid-column: 2 / 4; grid-row: 5; width: 85%; margin: auto;">
+        Copyright &copy; 2017-2018 John R. Craps - All Rights Reserved</br>
+        Unauthorized copying, modification, and/or distribution of this file, via any medium, is strictly prohibited.</br>
+        Version 0.5.2 - For internal use only</br>
+      </p>
+    </div>
 
   <script>
   function toggleRelay(...args){
