@@ -71,8 +71,8 @@ function toggleRelay(location){
     let readi = parseInt(read[i], 16)..toString(2);
     inta = (inta | readi).toString(16);
 
-    let firstByte = parseInt(inta.slice(2,4),16);
-    let secondByte = parseInt(inta.slice(4,6),16);
+    let firstByte = parseInt(inta.slice(0,2),16);
+    let secondByte = parseInt(inta.slice(2,4),16);
 
     i2c.writeByteSync(0x70, 0x04, i);
     i2c.writeByteSync(0x20, secondByte, firstByte);
