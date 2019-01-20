@@ -1,6 +1,6 @@
 /*  Copyright © 2017-2018 John R. Craps - All Rights Reserved
  *  Unauthorized copying, modification, and/or distribution of this file, via any medium, is strictly prohibited.
- *  Version 0.5.2 - For internal use only
+ *  Version 0.6.3 - For internal use only
  */
 
 var http = require('http')
@@ -33,6 +33,7 @@ var server = http.createServer(function (request, response) {
       response.writeHead(500)
       response.end()      // end the response so browsers don't hang
       console.log(e.stack)
+
     }
 });
 
@@ -59,23 +60,28 @@ function clientUpdate(){
     i2c.writeSync(0x70, Buffer.from([0x04, boards[i]]));
     read[i] = i2c.readWordSync(0x20).toString(16);
   };
-  console.log(read);
+  //console.log(read);
 };
 
 //toggleRelay
 function toggleRelay(location){
   location = location.toString();
   //fff
-  for (var i = 0; i < boards.length; i++)
-    let inta = parseInt(location.slice(i,i+1),16)+1)..toString(2);
-    let readi = parseInt(read[i], 16)..toString(2);
-    inta = (inta | readi).toString(16);
-
-    let firstByte = parseInt(inta.slice(0,2),16);
-    let secondByte = parseInt(inta.slice(2,4),16);
-
-    i2c.writeByteSync(0x70, 0x04, i);
-    i2c.writeByteSync(0x20, secondByte, firstByte);
+  clientUpdate();
+  for (var i = 0; i < boards.length; i++) {
+    var intb = location.slice(i,i+1)
+    var inta = (intb == "-") ? "0":2**parseInt(intb,16);
+    var readi = parseInt(read[i], 16);
+    inta = parseInt((inta | parseInt(65535-readi))).toString(16);
+    inta = ("000"+inta).slice(-4);
+console.log(inta);
+    var firstByte = (255-parseInt(inta.slice(0,2),16));
+    var secondByte = (255-parseInt(inta.slice(2,4),16));
+    console.log(secondByte.toString(16),firstByte.toString(16));
+    var boardi = parseInt(boards[i]);
+    i2c.writeByteSync(0x70, 0x04, boardi);
+    i2c.writeByteSync(0x20,secondByte,firstByte);
+    };
 };
 
 //socketio configuration
