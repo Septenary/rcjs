@@ -10,7 +10,7 @@ var path = require('path')
 var baseDirectory = __dirname
 var raspi = require('raspi')
 var I2C = require('raspi-i2c').I2C;
-var port = 80
+var port = 3000
 
 //server configuration
 var server = http.createServer(function (request, response) {
@@ -50,7 +50,7 @@ raspi.init(() => {
 
 //clear
 function clear(){
-	i2c.writeByteSync(0x70, 0x04, 0xff);
+  i2c.writeByteSync(0x70, 0x04, 0xff);
   i2c.writeByteSync(0x20, 0xff, 0xff);
 };
 
